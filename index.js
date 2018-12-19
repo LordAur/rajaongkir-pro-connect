@@ -75,3 +75,20 @@ exports.getSubdistrict = (apiKey, cityId) => {
       });
   });
 };
+
+exports.getCost = (apiKey, json) => {
+  return new Promise((resolve, reject) => {
+    unirest
+      .post('https://pro.rajaongkir.com/api/cost')
+      .headers({ key: apiKey })
+      .send(json)
+      .timeout(30000)
+      .end((response) => {
+        if (response.statusCode !== 200) {
+          reject(response.body);
+        }
+
+        resolve(response.body.rajaongkir.results[0].costs);
+      });
+  });
+};
