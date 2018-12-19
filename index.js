@@ -1,62 +1,34 @@
 const unirest = require('unirest');
 
-exports.getProvince = (apiKey, provinceId = null) => {
+exports.getProvince = (apiKey, provinceId = '') => {
   return new Promise((resolve, reject) => {
-    if (provinceId === null) {
-      unirest
-        .get('https://pro.rajaongkir.com/api/province')
-        .headers({ key: apiKey })
-        .timeout(30000)
-        .end((response) => {
-          if (response.statusCode !== 200) {
-            reject(response.body);
-          }
+    unirest
+      .get(`https://pro.rajaongkir.com/api/province?id=${provinceId}`)
+      .headers({ key: apiKey })
+      .timeout(30000)
+      .end((response) => {
+        if (response.statusCode !== 200) {
+          reject(response.body);
+        }
 
-          resolve(response.body.rajaongkir.results);
-        });
-    } else {
-      unirest
-        .get(`https://pro.rajaongkir.com/api/province?id=${provinceId}`)
-        .headers({ key: apiKey })
-        .timeout(30000)
-        .end((response) => {
-          if (response.statusCode !== 200) {
-            reject(response.body);
-          }
-
-          resolve(response.body.rajaongkir.results);
-        });
-    }
+        resolve(response.body.rajaongkir.results);
+      });
   });
 };
 
-exports.getCity = (apiKey, cityId = null, provinceId) => {
+exports.getCity = (apiKey, cityId = '', provinceId = '') => {
   return new Promise((resolve, reject) => {
-    if (cityId === null) {
-      unirest
-        .get(`https://pro.rajaongkir.com/api/city?province=${provinceId}`)
-        .headers({ key: apiKey })
-        .timeout(30000)
-        .end((response) => {
-          if (response.statusCode !== 200) {
-            reject(response.body);
-          }
+    unirest
+      .get(`https://pro.rajaongkir.com/api/city?id=${cityId}&province=${provinceId}`)
+      .headers({ key: apiKey })
+      .timeout(30000)
+      .end((response) => {
+        if (response.statusCode !== 200) {
+          reject(response.body);
+        }
 
-          resolve(response.body.rajaongkir.results);
-        });
-    } else {
-      unirest
-        .get(`https://pro.rajaongkir.com/api/city?id=${cityId}&province=${provinceId}`)
-        .headers({ key: apiKey })
-        .timeout(30000)
-        .end((response) => {
-          if (response.statusCode !== 200) {
-            reject(response.body);
-          }
-
-          resolve(response.body.rajaongkir.results);
-        });
-    }
+        resolve(response.body.rajaongkir.results);
+      });
   });
 };
 
@@ -89,6 +61,22 @@ exports.getCost = (apiKey, json) => {
         }
 
         resolve(response.body.rajaongkir.results[0].costs);
+      });
+  });
+};
+
+exports.getInternationalOrigin = (apiKey, cityId = '', provinceId = '') => {
+  return new Promise((resolve, reject) => {
+    unirest
+      .get(`https://pro.rajaongkir.com/api/v2/internationalOrigin?id=${cityId}&province=${provinceId}`)
+      .headers({ key: apiKey })
+      .timeout(30000)
+      .end((response) => {
+        if (response.statusCode !== 200) {
+          reject(response.body);
+        }
+
+        resolve(response.body.rajaongkir.results);
       });
   });
 };
