@@ -59,3 +59,19 @@ exports.getCity = (apiKey, cityId = null, provinceId) => {
     }
   });
 };
+
+exports.getSubdistrict = (apiKey, cityId) => {
+  return new Promise((resolve, reject) => {
+    unirest
+      .get(`https://pro.rajaongkir.com/api/subdistrict?city=${cityId}`)
+      .headers({ key: apiKey })
+      .timeout(30000)
+      .end((response) => {
+        if (response.statusCode !== 200) {
+          reject(response.body);
+        }
+
+        resolve(response.body.rajaongkir.results);
+      });
+  });
+};
