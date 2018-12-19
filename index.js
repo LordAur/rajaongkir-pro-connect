@@ -80,3 +80,19 @@ exports.getInternationalOrigin = (apiKey, cityId = '', provinceId = '') => {
       });
   });
 };
+
+exports.getInternationalDestination = (apiKey, countryId = '') => {
+  return new Promise((resolve, reject) => {
+    unirest
+      .get(`https://pro.rajaongkir.com/api/v2/internationalDestination?id=${countryId}`)
+      .headers({ key: apiKey })
+      .timeout(30000)
+      .end((response) => {
+        if (response.statusCode !== 200) {
+          reject(response.body);
+        }
+
+        resolve(response.body.rajaongkir.results);
+      });
+  });
+};
