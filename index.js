@@ -96,3 +96,20 @@ exports.getInternationalDestination = (apiKey, countryId = '') => {
       });
   });
 };
+
+exports.getInternationalCost = (apiKey, json) => {
+  return new Promise((resolve, reject) => {
+    unirest
+      .post('https://pro.rajaongkir.com/api/v2/internationalCost')
+      .headers({ key: apiKey })
+      .send(json)
+      .timeout(30000)
+      .end((response) => {
+        if (response.statusCode !== 200) {
+          reject(response.body);
+        }
+
+        resolve(response.body.rajaongkir.results[0].costs);
+      });
+  });
+};
