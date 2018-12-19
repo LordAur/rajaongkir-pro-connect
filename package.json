@@ -1,14 +1,33 @@
 {
   "name": "rajaongkir-pro-connect",
   "version": "1.0.0",
-  "description": "",
+  "description": "This package is to make easier to connect the rajaongkir api",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout 30000"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "rajaongkir"
+  ],
+  "homepage": "https://github.com/LordAur/rajaongkir-pro-connect",
+  "bugs": {
+    "url": "https://github.com/LordAur/rajaongkir-pro-connect/issues",
+    "email": "yudha.webdev@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LordAur/rajaongkir-pro-connect"
+  },
+  "authors": [
+    {
+      "name": "Yudha Pratama Wicaksana",
+      "email": "yudha.webdev@gmail.com",
+      "homepage": "https://yudhapratama.com",
+      "github": "https://github.com/LordAur",
+      "twitter": "https://twitter.com/LordAur"
+    }
+  ],
+  "license": "MIT",
   "devDependencies": {
     "eslint": "^5.10.0",
     "eslint-config-airbnb-base": "^13.1.0",
